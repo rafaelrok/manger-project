@@ -1,4 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +9,7 @@
     <body>
         <h1><%= "Sistema Empresas" %></h1>
         <br/>
-        <a href="formNewCompany.html">Cadastro de Empresa</a>
+        <a href="formNewCompany">Cadastro de Empresa</a>
         <a href="listCompany">Listar Empresas</a>
     </body>
 </html>

@@ -7,6 +7,8 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @WebServlet(name = "NewCompanyServelet", value = "/newCompany")
 public class NewCompanyServlet extends HttpServlet {
@@ -16,8 +18,19 @@ public class NewCompanyServlet extends HttpServlet {
         System.out.println("Cadastrando nova empresa");
 
         String nameCompany = request.getParameter("name");
+        String dateInitialCompany = request.getParameter("initialDate");
+
+        Date initialDate = null;
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            initialDate = sdf.parse(dateInitialCompany);
+            } catch (Exception e) {
+            throw new ServletException(e);
+        }
+
         Company company = new Company();
         company.setName(nameCompany);
+        company.setInitialDate(initialDate);
 
         DataBase dataBase = new DataBase();
         dataBase.save(company);

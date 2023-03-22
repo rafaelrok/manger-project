@@ -1,9 +1,3 @@
-<%@ page import="java.util.List" %>
-<%@ page import="br.com.rafaelvieira.managerproject.model.Company" %>
-
-<%--- No IDEA IntelliJ  a lib jstl que contem no projeto deve ser importado na lib global pela estrutura do projeto---%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="core" %>
-
 <%--
   Created by IntelliJ IDEA.
   User: rafae
@@ -13,15 +7,22 @@
 --%>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="java.util.List" %>
+<%@ page import="br.com.rafaelvieira.managerproject.model.Company" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
+<!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
     <title>Lista Empresas</title>
 </head>
     <body>
         Lista de Empresas <br />
         <ul>
             <core:forEach items="${companies}" var="company">
-                <li>${company.name}</li>
+                <li>${company.name} - <fmt:formatDate value="${company.initialDate}" pattern="dd/MM/yyyy" /> </li>
             </core:forEach>
         </ul>
     </body>
