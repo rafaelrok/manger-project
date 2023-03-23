@@ -10,10 +10,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
-@WebServlet(name = "ListCompanyServlet", value = "/listCompany")
+@WebServlet("/listCompany")
 public class ListCompanyServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void service(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         DataBase dataBase = new DataBase();
@@ -21,8 +21,9 @@ public class ListCompanyServlet extends HttpServlet {
 
         request.setAttribute("companies", list);
 
-        RequestDispatcher rd = request.getRequestDispatcher("/listCompany.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/pages/List/listCompany.jsp");
         rd.forward(request, response);
+
 
 
     }

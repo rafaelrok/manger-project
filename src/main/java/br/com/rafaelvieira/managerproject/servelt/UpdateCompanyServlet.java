@@ -10,35 +10,35 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-@WebServlet("/newCompany")
-public class NewCompanyServlet extends HttpServlet {
+@WebServlet(name = "UpdateCompanyServlet", value = "/updateCompany")
+public class UpdateCompanyServlet extends HttpServlet {
 
-    protected void service(HttpServletRequest request, HttpServletResponse response)
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         System.out.println("Cadastrando nova empresa");
 
         String nameCompany = request.getParameter("name");
         String dateInitialCompany = request.getParameter("initialDate");
+        String paramId = request.getParameter("id");
+        Integer id = Integer.valueOf(paramId);
 
         Date initialDate = null;
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
             initialDate = sdf.parse(dateInitialCompany);
-            } catch (Exception e) {
+        } catch (Exception e) {
             throw new ServletException(e);
         }
 
-        Company company = new Company();
+        System.out.println(id);
+
+        DataBase dataBase = new DataBase();
+        Company company = dataBase.findById(id);
         company.setName(nameCompany);
         company.setInitialDate(initialDate);
 
-        DataBase dataBase = new DataBase();
-        dataBase.save(company);
-
         response.sendRedirect("listCompany");
 
-        RequestDispatcher rd = request.getRequestDispatcher("/pages/List/listCompany.jsp");
-        request.setAttribute("company", company.getName());
-        rd.forward(request, response);
     }
 }
